@@ -30,3 +30,20 @@ exports.logQuery = ({ logger, query, context, logTrace }) => {
     bindings: SQLQueryObj.bindings
   });
 };
+
+exports.buildQueryParams = (query, includeVersion) => {
+  const queryParams = Object.keys(query)
+    .filter(key => {
+      if (key === "channel") {
+        return false;
+      }
+      if (!includeVersion && key === "version") {
+        return false;
+      }
+      return true;
+    })
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`)
+    .join("&");
+
+  return queryParams;
+};

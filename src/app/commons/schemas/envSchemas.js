@@ -26,6 +26,9 @@ exports.envSchema = {
     },
     CLOUD_BUCKET_NAME: {
       type: "string"
+    },
+    TRUEIN_BASE_URL: {
+      type: "string"
     }
   }
 };

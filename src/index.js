@@ -8,7 +8,8 @@ const fastifyMetrics = require("fastify-metrics");
 
 const { envSchema: schema } = require("./app/commons/schemas/envSchemas");
 const { knexConfig } = require("../config/index");
-const routes = require("./app/users/routes");
+// const routes = require("./app/users/routes");
+const leaveRoutes = require("./app/leave/routes");
 
 // PLUGINS
 const ajv = require("./app/plugins/ajv");
@@ -17,7 +18,7 @@ const knex = require("./app/plugins/knex");
 const readGcpSecret = require("./app/plugins/readGcpSecret");
 const httpClient = require("./app/plugins/httpClient");
 const pubsub = require("./app/plugins/pubsub");
-const cloudBucket = require("./app/plugins/cloudBucket");
+// const cloudBucket = require("./app/plugins/cloudBucket");
 const artifactPlugin = require("./app/plugins/artifact-file-upload");
 
 const {
@@ -62,11 +63,12 @@ async function create() {
   await fastify.register(swagger, SWAGGER_CONFIGS);
   await fastify.register(swaggerUi, SWAGGER_UI_CONFIGS);
   await fastify.register(pubsub);
-  await fastify.register(cloudBucket);
+  // await fastify.register(cloudBucket);
   await fastify.register(artifactPlugin);
 
   // ROUTES
-  await fastify.register(routes, { prefix: "/v1" });
+  // await fastify.register(routes, { prefix: "/v1" });
+  await fastify.register(leaveRoutes, { prefix: "/v1/leave" });
 
   // Fastify-metrics
   if (process.env.NODE_ENV !== "test") {

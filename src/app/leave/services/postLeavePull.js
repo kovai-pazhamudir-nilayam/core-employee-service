@@ -1,0 +1,35 @@
+const leaveRepo = require("../repository/leave");
+const downstreamCallsRepo = require("../repository/downstreamCalls");
+const {
+  transformTrueInResponse,
+  transformQueryForTruein
+} = require("../transformers/postLeavePull");
+
+function postLeavePullService(fastify) {
+  const { upsertLeave } = leaveRepo(fastify);
+  const { getLeaveDataFromTruein } = downstreamCallsRepo(fastify);
+
+  return async ({ body, logTrace }) => {
+    const { knex } = fastify;
+    // const { from_date, to_date } = body;
+
+    const transformedQuery = transformQueryForTruein({ query: body });
+
+    const trueinResponse = await getLeaveDataFromTruein({
+      query: transformedQuery,
+      logTrace
+    });
+
+    const transformedData = transformTrueInResponse({
+      data: trueinResponse.data
+    });
+
+    await upsertLeave.call(knex, {
+      data: transformedData,
+      logTrace
+    });
+
+    return { success: true };
+  };
+}
+module.exports = postLeavePullService;
