@@ -6,8 +6,7 @@ const { buildQueryParams } = require("../../commons/helpers");
 function downstreamCallsRepo(fastify) {
   async function getLeaveDataFromTruein({ query, logTrace }) {
     // const auth = await getAuthToken("PLATFORM");
-    const auth =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOjEzMzUsImRiX3Rva2VuIjoiIiwiaWF0IjoxNzQ3MzczNDUyLCJleHAiOjE3NDc0NTk4NTIsImlzcyI6InRydWVpbi5jb20ifQ.ZVxSWTUiUn-ifi_nY25mqhKIDjqLrJuyZqDmvUD6jTA";
+    const auth = process.env.TRUEIN_TOKEN;
     const true_in_query = buildQueryParams(query);
 
     const response = await fastify.request({
