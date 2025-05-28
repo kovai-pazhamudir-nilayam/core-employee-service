@@ -11,9 +11,8 @@ function postLeavePullService(fastify) {
 
   return async ({ body, logTrace }) => {
     const { knex } = fastify;
-    // const { from_date, to_date } = body;
 
-    const transformedQuery = transformQueryForTruein({ query: body });
+    const transformedQuery = transformQueryForTruein({ query: body.data });
 
     const trueinResponse = await getLeaveDataFromTruein({
       query: transformedQuery,

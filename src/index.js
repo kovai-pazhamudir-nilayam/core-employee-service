@@ -9,7 +9,10 @@ const fastifyMetrics = require("fastify-metrics");
 const { envSchema: schema } = require("./app/commons/schemas/envSchemas");
 const { knexConfig } = require("../config/index");
 // const routes = require("./app/users/routes");
+const attendanceRoutes = require("./app/leave/routes");
 const leaveRoutes = require("./app/leave/routes");
+const employeeRoutes = require("./app/employee/routes");
+const cronJobRoutes = require("./app/cron/routes");
 
 // PLUGINS
 const ajv = require("./app/plugins/ajv");
@@ -18,6 +21,7 @@ const knex = require("./app/plugins/knex");
 const readGcpSecret = require("./app/plugins/readGcpSecret");
 const httpClient = require("./app/plugins/httpClient");
 const pubsub = require("./app/plugins/pubsub");
+const cloudTask = require("./app/plugins/cloudTask");
 // const cloudBucket = require("./app/plugins/cloudBucket");
 const artifactPlugin = require("./app/plugins/artifact-file-upload");
 
@@ -65,10 +69,13 @@ async function create() {
   await fastify.register(pubsub);
   // await fastify.register(cloudBucket);
   await fastify.register(artifactPlugin);
+  await fastify.register(cloudTask);
 
   // ROUTES
-  // await fastify.register(routes, { prefix: "/v1" });
+  await fastify.register(cronJobRoutes, { prefix: "/v1/cron" });
   await fastify.register(leaveRoutes, { prefix: "/v1/leave" });
+  await fastify.register(attendanceRoutes, { prefix: "/v1/attendance" });
+  await fastify.register(employeeRoutes, { prefix: "/v1/employee" });
 
   // Fastify-metrics
   if (process.env.NODE_ENV !== "test") {

@@ -1,5 +1,3 @@
-const postEmployee = require("./postEmployee");
+const postEmployeePullHandler = require("./postEmployeePull");
 
-module.exports = {
-  postEmployee
-};
+module.exports = { postEmployeePullHandler };

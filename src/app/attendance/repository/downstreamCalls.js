@@ -15,6 +15,7 @@ function downstreamCallsRepo(fastify) {
       method: "GET",
       headers: {
         ...logTrace,
+        "Subscription-key": "5dbd7c5c2729d79c28872fcb99430e52",
         Authorization: `Bearer ${auth}`
       },
       path: "/truein/apis/ext/attendance/v1.0/dailyAttendanceLog",
@@ -27,9 +28,7 @@ function downstreamCallsRepo(fastify) {
     return response;
   }
 
-  return {
-    getDailyAttendanceFromTruein
-  };
+  return { getDailyAttendanceFromTruein };
 }
 
 module.exports = downstreamCallsRepo;

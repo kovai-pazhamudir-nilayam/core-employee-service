@@ -1,5 +1,3 @@
-const createUser = require("./createUsers");
+const postAttendancePull = require("./postAttendancePull");
 
-module.exports = {
-  createUser
-};
+module.exports = { postAttendancePull };

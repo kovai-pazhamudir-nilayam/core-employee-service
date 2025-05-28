@@ -18,7 +18,11 @@ spec:
         - /metrics
         - /health
         - /documentation
-        - /documentation/*
+        - /v1/employee/pull
+        - /v1/leave/pull
+        - /v1/attendance/pull
+        - /v1/cron/truin-cron
+        
   - from:
     - source:
         principals:

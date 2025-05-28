@@ -1,5 +1,4 @@
 const objectMapper = require("object-mapper");
-const { getCurrentTimestamp } = require("../../commons/helpers");
 
 const employeeMap = {
   empId: "emp_id",
@@ -12,20 +11,11 @@ const employeeMap = {
     })
   },
   staff_type: "emp_type",
-  joining_date: {
-    key: "date_of_joining",
-    transform: val => (val && val.trim() !== "" ? val : null)
-  },
+  joining_date: "date_of_joining",
   contractor: "contractor_name",
-  valid_until_date: {
-    key: "contract_validity_date",
-    transform: val => (val && val.trim() !== "" ? val : null)
-  },
+  valid_until_date: "contract_validity_date",
   gender: "gender",
-  dob: {
-    key: "date_of_birth",
-    transform: val => (val && val.trim() !== "" ? val : null)
-  },
+  dob: "date_of_birth",
   email: "email_id",
   designation: "designation",
   grade: "grade",
@@ -56,35 +46,12 @@ const employeeMap = {
     key: "is_allotted_leave",
     transform: val => val === "1"
   },
-  last_working_day: {
-    key: "last_working_date",
-    transform: val => (val && val.trim() !== "" ? val : null)
-  },
+  last_working_day: "last_working_date",
   status: "status",
   geofencingLocation: "geofencing_site_id",
   additionalSites: {
     key: "additional_site_ids",
     transform: val => (val ? val.split(",") : [])
-  },
-  createdAt: {
-    key: "created_at",
-    transform: () => getCurrentTimestamp()
-  },
-  createdBy: {
-    key: "created_by",
-    transform: () => "SYSTEM"
-  },
-  lastModifiedAt: {
-    key: "last_modified_at",
-    transform: () => getCurrentTimestamp()
-  },
-  lastModifiedBy: {
-    key: "last_modified_by",
-    transform: () => "SYSTEM"
-  },
-  apiVersion: {
-    key: "api_version",
-    transform: () => "v1"
   }
 };
 

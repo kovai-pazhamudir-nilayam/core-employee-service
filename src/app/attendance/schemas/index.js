@@ -1,7 +1,3 @@
-const getUserById = require("./getUserById");
-const postAddUser = require("./addUser");
+const postAttendancePull = require("./postAttendancePull");
 
-module.exports = {
-  postAddUser,
-  getUserById
-};
+module.exports = { postAttendancePull };

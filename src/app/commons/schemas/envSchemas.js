@@ -29,6 +29,18 @@ exports.envSchema = {
     },
     TRUEIN_BASE_URL: {
       type: "string"
+    },
+    SERVICE_BASE_URL: {
+      type: "string"
+    },
+    GCP_PROJECT_ID: {
+      type: "string"
+    },
+    GOOGLE_APPLICATION_CREDENTIALS: {
+      type: "string"
+    },
+    GCP_ZONE: {
+      type: "string"
     }
   }
 };

@@ -26,9 +26,7 @@ function downstreamCallsRepo(fastify) {
     return response;
   }
 
-  return {
-    getLeaveDataFromTruein
-  };
+  return { getLeaveDataFromTruein };
 }
 
 module.exports = downstreamCallsRepo;

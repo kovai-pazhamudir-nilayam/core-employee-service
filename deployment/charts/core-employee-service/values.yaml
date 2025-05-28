@@ -11,7 +11,7 @@ autoscaling:
   enabled: false
 
 image:
-  repository: us.gcr.io/kpn-staging/core-user-service
+  repository: us.gcr.io/kpn-staging/core-employee-service
   tag: $IMAGE_TAG
   pullPolicy: IfNotPresent
   pullSecret:
@@ -36,7 +36,7 @@ ingress:
     {}
     # kubernetes.io/ingress.class: nginx
   # kubernetes.io/tls-acme: "true"
-  uriPrefix: /core-user-service/
+  uriPrefix: /core-employee-service/
   hosts:
     - "*"
   tls: []
@@ -84,10 +84,10 @@ environmentVariables:
   MAGENTO_URI: https://mcstaging.ebo.com/graphql
 
 gcp:
-  enabled: false
+  enabled: true
 
 database:
-  enabled: false
+  enabled: true
 
 destinationPolicy:
   maxConnections: 6000

@@ -1,22 +1,16 @@
 const { errorSchemas } = require("../../commons/schemas/errorSchemas");
 
-const postLeavePullSchema = {
+const postEmployeePullSchema = {
   tags: ["LEAVE"],
-  summary: "This API is to pull leave data from truein",
+  summary: "This API is to create cloud task and create a employee entry in db",
   headers: { $ref: "request-headers#" },
   body: {
     type: "object",
     required: ["name", "data"],
+    additionalProperties: false,
     properties: {
-      name: { type: "string" },
-      data: {
-        type: "object",
-        required: ["from_date", "to_date"],
-        properties: {
-          from_date: { type: "string" },
-          to_date: { type: "string" }
-        }
-      }
+      name: { type: "string", minLength: 1 },
+      data: { type: "object", additionalProperties: true }
     }
   },
   response: {
@@ -30,4 +24,4 @@ const postLeavePullSchema = {
   }
 };
 
-module.exports = postLeavePullSchema;
+module.exports = postEmployeePullSchema;

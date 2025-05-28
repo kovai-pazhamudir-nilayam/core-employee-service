@@ -1,4 +1,7 @@
 exports.connectionCheck = db => db.raw("select 1+1 as result");
+const moment = require("moment-timezone");
+
+exports.getCurrentTimestamp = () => moment().toISOString();
 
 exports.getAuditInfo = entity => {
   const { audit } = entity;

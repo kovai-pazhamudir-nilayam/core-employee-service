@@ -15,7 +15,7 @@ autoscaling:
   targetMemoryUtilizationPercentage: 80
 
 image:
-  repository: us-docker.pkg.dev/kpn-platform-components/us.gcr.io/core-user-service
+  repository: us-docker.pkg.dev/kpn-platform-components/us.gcr.io/core-employee-service
   tag: $IMAGE_TAG
   pullPolicy: IfNotPresent
   pullSecret:
@@ -89,10 +89,10 @@ environmentVariables:
   TRUEIN_BASE_URL: ""
 
 gcp:
-  enabled: false
+  enabled: true
 
 database:
-  enabled: false
+  enabled: true
 
 destinationPolicy:
   maxConnections: 6000
