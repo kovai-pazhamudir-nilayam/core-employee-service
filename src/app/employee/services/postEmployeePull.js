@@ -6,9 +6,9 @@ const { transformTrueInResponse } = require("../transformers/postEmployee");
 
 const createCloudTasks = async ({ fastify, body, logTrace }) => {
   const { SERVICE_BASE_URL } = fastify.config;
-  const TASKS_URL = `${SERVICE_BASE_URL}/v1/employee/cloud-task`;
+  const TASKS_URL = `${SERVICE_BASE_URL}/v1/employee/pull`;
   return fastify.createCloudTask({
-    queue: TASK_QUEUES.INVOICE_QUEUE, // invoice-queue
+    queue: TASK_QUEUES.TRUEIN_QUEUE,
     url: TASKS_URL,
     payload: { name: "getEmployeeDtls", data: body },
     delayInSeconds: 5 * 60, // 5 minutes delay
@@ -25,7 +25,7 @@ function postEmployeePullService(fastify) {
     const isInitialCall = !("more_rows" in body.data);
 
     const employeesDetails = await getEmployeeDetailsFromTruein({
-      query: isInitialCall ? {} : { lastUid: body.data.lastUid },
+      query: isInitialCall ? {} : { lastUid: body.data.last_uid },
       logTrace
     });
 

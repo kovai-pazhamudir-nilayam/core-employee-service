@@ -1,3 +1,3 @@
-const createTruinCloudTask = require("./createTruinCloudTask");
+const createTrueinCloudTask = require("./createTrueinCloudTask");
 
-module.exports = { createTruinCloudTask };
+module.exports = { createTrueinCloudTask };

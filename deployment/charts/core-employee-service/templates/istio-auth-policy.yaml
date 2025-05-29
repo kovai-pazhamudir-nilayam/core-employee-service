@@ -21,7 +21,7 @@ spec:
         - /v1/employee/pull
         - /v1/leave/pull
         - /v1/attendance/pull
-        - /v1/cron/truin-cron
+        - /v1/truein-cron
         
   - from:
     - source:

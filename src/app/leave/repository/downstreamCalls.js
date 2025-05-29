@@ -1,12 +1,7 @@
-const {
-  getAuthToken
-} = require("@kovai-pazhamudir-nilayam/kpn-platform-token");
 const { buildQueryParams } = require("../../commons/helpers");
 
 function downstreamCallsRepo(fastify) {
-  async function getLeaveDataFromTruein({ query, logTrace }) {
-    // const auth = await getAuthToken("PLATFORM");
-    const auth = process.env.TRUEIN_TOKEN;
+  async function getLeaveDataFromTruein({ query, accessToken, logTrace }) {
     const true_in_query = buildQueryParams(query);
 
     const response = await fastify.request({
@@ -14,7 +9,7 @@ function downstreamCallsRepo(fastify) {
       method: "GET",
       headers: {
         ...logTrace,
-        Authorization: `Bearer ${auth}`
+        Authorization: `Bearer ${accessToken}`
       },
       path: "/truein/ext/v1/leave/getLeave",
       downstream_system: "Truein",
@@ -26,7 +21,24 @@ function downstreamCallsRepo(fastify) {
     return response;
   }
 
-  return { getLeaveDataFromTruein };
+  async function getTrueinAccessToken({ body, logTrace }) {
+    const response = await fastify.request({
+      // https://api.truein.com/connect/token
+      url: `${fastify.config.TRUEIN_BASE_URL}/connect/token`,
+      method: "POST",
+      body,
+      headers: { ...logTrace },
+      path: "/truein/ext/v1/connect/token",
+      downstream_system: "Truein",
+      source_system: "core-employee-service",
+      domain: "employee",
+      functionality: `Get access Token`
+    });
+
+    return response;
+  }
+
+  return { getLeaveDataFromTruein, getTrueinAccessToken };
 }
 
 module.exports = downstreamCallsRepo;

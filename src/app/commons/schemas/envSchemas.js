@@ -41,6 +41,18 @@ exports.envSchema = {
     },
     GCP_ZONE: {
       type: "string"
+    },
+    TRUEIN_ACCESS_KEY_ID: {
+      type: "string"
+    },
+    TRUEIN_SECRET_SUCCESS_KEY: {
+      type: "string"
+    },
+    TRUEIN_GRANT_TYPE: {
+      type: "string"
+    },
+    SUBSCRIPTION_KEY: {
+      type: "string"
     }
   }
 };

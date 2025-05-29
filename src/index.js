@@ -72,7 +72,7 @@ async function create() {
   await fastify.register(cloudTask);
 
   // ROUTES
-  await fastify.register(cronJobRoutes, { prefix: "/v1/cron" });
+  await fastify.register(cronJobRoutes, { prefix: "/v1" });
   await fastify.register(leaveRoutes, { prefix: "/v1/leave" });
   await fastify.register(attendanceRoutes, { prefix: "/v1/attendance" });
   await fastify.register(employeeRoutes, { prefix: "/v1/employee" });

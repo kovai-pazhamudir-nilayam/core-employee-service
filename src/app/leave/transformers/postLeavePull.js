@@ -67,4 +67,13 @@ const transformQueryForTruein = ({ query }) =>
     return acc;
   }, {});
 
-module.exports = { transformTrueInResponse, transformQueryForTruein };
+const transformAccessTokenResponse = ({ data }) => {
+  const { access_token } = data;
+  return access_token;
+};
+
+module.exports = {
+  transformTrueInResponse,
+  transformQueryForTruein,
+  transformAccessTokenResponse
+};

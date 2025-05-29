@@ -1,5 +1,5 @@
 const TASK_QUEUES = {
-  TRUIN_QUEUE: "truin-queue",
+  TRUEIN_QUEUE: "truein-queue",
   INVOICE_QUEUE: "invoice-queue"
 };
 
