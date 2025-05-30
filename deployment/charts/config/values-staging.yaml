@@ -84,6 +84,7 @@ podAntiAffinity:
 environmentVariables:
   ENVIRONMENT: STAGING
   LOG_LEVEL: "debug"
+  GCP_ZONE: "asia-south1"
   CORE_KPN_URI: https://kcloud.kovaipazhamudir.com/mobile
   TRUEIN_BASE_URL: https://api.truein.com
   TRUEIN_ACCESS_KEY_ID: 70994b91144414348e5150875a3897
