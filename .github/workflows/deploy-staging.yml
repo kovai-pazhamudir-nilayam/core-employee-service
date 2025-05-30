@@ -16,7 +16,7 @@ env:
 
 jobs:
   node-build-deploy:
-    runs-on: ubuntu-latest
+    runs-on: core-app
 
     strategy:
       matrix:
