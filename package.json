@@ -1,7 +1,7 @@
 {
-  "name": "kpn-user-service",
+  "name": "core-employee-service",
   "version": "1.0.0",
-  "description": "KPN user service",
+  "description": "core employee service",
   "main": "src/index.js",
   "author": "",
   "license": "UNLICENSED",

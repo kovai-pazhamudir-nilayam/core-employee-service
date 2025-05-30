@@ -1,6 +1,5 @@
 const TASK_QUEUES = {
-  TRUEIN_QUEUE: "truein-queue",
-  INVOICE_QUEUE: "invoice-queue"
+  TRUEIN_QUEUE: "truein-queue"
 };
 
 module.exports = { TASK_QUEUES };
