@@ -7,7 +7,7 @@ const {
 const postTrueinAccessTokenService = require("./postTrueinAccessToken");
 
 function postLeavePullService(fastify) {
-  const { upsertLeave } = leaveRepo(fastify);
+  const { createLeave } = leaveRepo(fastify);
   const { getLeaveDataFromTruein } = downstreamCallsRepo(fastify);
 
   return async ({ body, logTrace }) => {
@@ -29,7 +29,7 @@ function postLeavePullService(fastify) {
       data: trueinResponse.data
     });
 
-    await upsertLeave.call(knex, {
+    await createLeave.call(knex, {
       data: transformedData,
       logTrace
     });
