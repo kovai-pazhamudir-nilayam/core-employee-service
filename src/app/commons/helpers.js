@@ -50,3 +50,23 @@ exports.buildQueryParams = (query, includeVersion) => {
 
   return queryParams;
 };
+
+exports.getBatches = (input, BATCH_SIZE) => {
+  const allBatches = [];
+  let tempBatch = [];
+  let counter = 0;
+  for (let i = 0; i < input.length; i += 1) {
+    tempBatch.push(input[i]);
+    counter += 1;
+    if (counter === BATCH_SIZE) {
+      counter = 0;
+      allBatches.push(tempBatch);
+      tempBatch = [];
+    } else if (i === input.length - 1) {
+      counter = 0;
+      allBatches.push(tempBatch);
+      tempBatch = [];
+    }
+  }
+  return allBatches;
+};

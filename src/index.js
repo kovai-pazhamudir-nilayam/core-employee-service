@@ -8,8 +8,7 @@ const fastifyMetrics = require("fastify-metrics");
 
 const { envSchema: schema } = require("./app/commons/schemas/envSchemas");
 const { knexConfig } = require("../config/index");
-// const routes = require("./app/users/routes");
-const attendanceRoutes = require("./app/leave/routes");
+const attendanceRoutes = require("./app/attendance/routes");
 const leaveRoutes = require("./app/leave/routes");
 const employeeRoutes = require("./app/employee/routes");
 const cronJobRoutes = require("./app/cron/routes");

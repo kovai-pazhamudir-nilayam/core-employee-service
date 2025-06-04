@@ -1,9 +1,8 @@
-const _ = require("lodash");
 const { TASK_QUEUES } = require("../../commons/constant");
 const attendanceRepo = require("../repository/attendance");
 const downstreamCallsRepo = require("../repository/downstreamCalls");
 const { transformTrueinResponse } = require("../transformers/postAttendance");
-const { yesterdayDate } = require("../../cron/commons/helper");
+const { getBatches } = require("../../commons/helpers");
 
 const createCloudTasks = async ({ fastify, body, logTrace }) => {
   const { SERVICE_BASE_URL } = fastify.config;
@@ -23,9 +22,7 @@ function postAttendancePullService(fastify) {
   return async ({ body, logTrace }) => {
     const { knex } = fastify;
 
-    const isInitialCall = !("more_rows" in body.data);
-
-    const query = isInitialCall ? {} : { lastUid: body.data.lastUid };
+    const query = { date: body.data.date, lastUid: body.data.last_uid };
     const dailyAttendance = await getDailyAttendanceFromTruein({
       query,
       logTrace
@@ -36,17 +33,27 @@ function postAttendancePullService(fastify) {
       data: dailyAttendance.data
     });
 
-    const uniqueAttendancePayload = _.uniqBy(attendancePayload, "emp_id"); // check
-
-    await upsertAttendance.call(knex, {
-      data: uniqueAttendancePayload,
-      logTrace
+    // will remove once truein attendance api fix
+    const attendanceBatches = getBatches(attendancePayload, 1000);
+    const attendanceBatchesPromises = attendanceBatches.map(attendanceBatch => {
+      return upsertAttendance.call(knex, {
+        data: attendanceBatch,
+        logTrace
+      });
     });
 
+    await Promise.all(attendanceBatchesPromises);
+
+    // [dont't remove]
+    // await upsertAttendance.call(knex, {
+    //   data: attendancePayload,
+    //   logTrace
+    // });
+
     // Decide if another task is needed
-    if (dailyAttendance.more_rows === 1) {
+    if (dailyAttendance.moreRows === "1") {
       const cloudTaskPayload = {
-        date: yesterdayDate,
+        date: body.data.date,
         last_uid: dailyAttendance.last_uid,
         more_rows: dailyAttendance.more_rows
       };

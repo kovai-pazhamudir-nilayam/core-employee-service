@@ -1,7 +1,7 @@
 const objectMapper = require("object-mapper");
 
 function mapInOuts(inOuts) {
-  return inOuts.map(entry => {
+  const inOutsArr = inOuts.map(entry => {
     const [inLat, inLong] = entry.inLocation.split(",");
     const [outLat, outLong] = entry.outLocation.split(",");
 
@@ -18,14 +18,24 @@ function mapInOuts(inOuts) {
       }
     };
   });
+  return JSON.stringify(inOutsArr);
 }
 
+const sanitizeDate = dateString => {
+  return dateString === "0000-00-00 00:00:00" ? null : dateString;
+};
 const attendanceMap = {
   emp_id: "emp_id",
   attendanceDate: "attendance_date",
   attendanceSite: "attendance_site_id",
-  firstInTime: "first_in_time",
-  lastOutTime: "last_out_time",
+  firstInTime: {
+    key: "first_in_time",
+    transform: val => sanitizeDate(val)
+  },
+  lastOutTime: {
+    key: "last_out_time",
+    transform: val => sanitizeDate(val)
+  },
   timeSpent: {
     key: "time_spent_in_mins",
     transform: val => Number(val)
@@ -53,9 +63,13 @@ const attendanceMap = {
     key: "in_out_times",
     transform: mapInOuts
   },
-  "": {
+  data_source: {
     key: "data_source",
     transform: () => "TRUEIN"
+  },
+  custom_info: {
+    key: "custom_info",
+    transform: () => {}
   }
 };
 

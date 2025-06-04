@@ -15,9 +15,7 @@ function attendanceRepo(fastify) {
     return query;
   }
 
-  return {
-    upsertAttendance
-  };
+  return { upsertAttendance };
 }
 
 module.exports = attendanceRepo;

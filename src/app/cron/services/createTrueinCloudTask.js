@@ -17,12 +17,12 @@ function createTrueinCloudTaskService(fastify) {
           to_date: currentDate
         },
         taskUrl: `${SERVICE_BASE_URL}/v1/leave/pull`
+      },
+      {
+        name: "dailyAttendanceLog",
+        data: { date: currentDate, last_uid: 0 },
+        taskUrl: `${SERVICE_BASE_URL}/v1/attendance/pull`
       }
-      // {
-      //   name: "dailyAttendanceLog",
-      //   data: { date: yesterdayDate, last_uid: 0 },
-      //   taskUrl: `${SERVICE_BASE_URL}/v1/attendance/pull`
-      // }
     ];
 
     // Create all 3 tasks in parallel
