@@ -2,7 +2,7 @@ const { logQuery } = require("../../commons/helpers");
 const { ATTENDANCE } = require("../commons/constants");
 
 function attendanceRepo(fastify) {
-  async function upsertAttendance({ data, logTrace }) {
+  async function insertAttendance({ data, logTrace }) {
     const knex = this;
     const query = knex(ATTENDANCE.NAME).returning("*").insert(data);
     logQuery({
@@ -15,7 +15,16 @@ function attendanceRepo(fastify) {
     return query;
   }
 
-  return { upsertAttendance };
+  async function insertAttendanceInBatches({ data, knexReference }) {
+    const knexTrx = this;
+    const queryResult = await knexReference
+      .batchInsert(ATTENDANCE.NAME, data, 1000)
+      .transacting(knexTrx);
+
+    return queryResult;
+  }
+
+  return { insertAttendance, insertAttendanceInBatches };
 }
 
 module.exports = attendanceRepo;

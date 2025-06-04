@@ -16,7 +16,7 @@ function employeeRepo(fastify) {
       logTrace
     });
     const response = await query;
-    return response[0];
+    return response;
   }
 
   async function getEmployeeById({ emp_id, logTrace }) {
