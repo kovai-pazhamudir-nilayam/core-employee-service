@@ -11,8 +11,8 @@ const httpHttpsAgentOpts = {
 
 const client = axios.create({
   httpAgent: new http.Agent(httpHttpAgentOpts),
-  httpsAgent: new https.Agent(httpHttpsAgentOpts),
-  timeout: 10000
+  httpsAgent: new https.Agent(httpHttpsAgentOpts)
+  // timeout: 10000
 });
 
 const httpClient = ({

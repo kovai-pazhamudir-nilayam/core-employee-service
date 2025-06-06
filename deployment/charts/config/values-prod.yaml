@@ -15,7 +15,7 @@ autoscaling:
   targetMemoryUtilizationPercentage: 80
 
 image:
-  repository: us-docker.pkg.dev/kpn-platform-components/us.gcr.io/core-user-service
+  repository: us-docker.pkg.dev/kpn-platform-components/us.gcr.io/core-employee-service
   tag: $IMAGE_TAG
   pullPolicy: IfNotPresent
   pullSecret:
@@ -40,7 +40,7 @@ ingress:
     {}
     # kubernetes.io/ingress.class: nginx
   # kubernetes.io/tls-acme: "true"
-  uriPrefix: /catalog/
+  uriPrefix: /employee/
   hosts:
     - services.kpnfarmfresh.com
     - services.kpnfresh.com
@@ -79,15 +79,23 @@ podAntiAffinity:
 
 environmentVariables:
   ENVIRONMENT: PROD
+  LOG_LEVEL: "debug"
   CORE_KPN_URI: https://kcloud.kovaipazhamudir.com/mobile
   CORE_KPN_IMAGE_BASE_URL: https://ibo.com
   AUTHN_SERVICE_URI: https://ibo.com
+  GCP_ZONE: "asia-south1"
+  TRUEIN_BASE_URL: https://api.truein.com
+  TRUEIN_ACCESS_KEY_ID: 70994b91144414348e5150875a3897
+  TRUEIN_SECRET_SUCCESS_KEY: 076e67f97f03c5d11c16f8e546894e4d13db4748ec2a7f1c417f6fdb434a7850
+  TRUEIN_GRANT_TYPE: client_credentials
+  SUBSCRIPTION_KEY: 5dbd7c5c2729d79c28872fcb99430e52
+  SERVICE_BASE_URL: "https://services.kpnfresh.com/employee"
 
 gcp:
   enabled: false
 
 database:
-  enabled: false
+  enabled: true
 
 destinationPolicy:
   maxConnections: 6000

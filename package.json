@@ -1,7 +1,7 @@
 {
-  "name": "kpn-user-service",
+  "name": "core-employee-service",
   "version": "1.0.0",
-  "description": "KPN user service",
+  "description": "core employee service",
   "main": "src/index.js",
   "author": "",
   "license": "UNLICENSED",
@@ -29,7 +29,9 @@
     "fastify-metrics": "^11.0.0",
     "http-status-codes": "^2.3.0",
     "knex": "^2.4.2",
+    "moment-timezone": "^0.6.0",
     "node-cache": "^5.1.2",
+    "object-mapper": "^6.2.0",
     "pg": "^8.12.0",
     "uuid": "^10.0.0"
   },
