@@ -10,13 +10,13 @@ const transformTrueInResponse = ({ data }) => {
       leaveCode,
       approvalStatus,
       approver,
-      approverComment
+      approverComment,
+      fromDateHalfDay,
+      toDateHalfDay,
       //   extRefId,
       //   siteName,
       //   siteCode,
       //   empName,
-      //   fromDateHalfDay,
-      //   toDateHalfDay,
       //   applySandwichPolicy,
       //   noOfHours,
       //   leaveDoc,
@@ -26,9 +26,9 @@ const transformTrueInResponse = ({ data }) => {
     // TODO: get clarification on half day leave
     const leave_dates = {
       from_date: fromDate,
-      is_from_date_half_day: false,
+      is_from_date_half_day: fromDateHalfDay,
       to_date: toDate,
-      is_to_date_half_day: false
+      is_to_date_half_day: toDateHalfDay
     };
 
     const comp_off_dates = [compOffDate];
